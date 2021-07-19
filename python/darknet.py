@@ -116,9 +116,7 @@ predict_image.restype = POINTER(c_float)
 
 def classify(net, meta, im):
     out = predict_image(net, im)
-    res = []
-    for i in range(meta.classes):
-        res.append((meta.names[i], out[i]))
+    res = [(meta.names[i], out[i]) for i in range(meta.classes)]
     res = sorted(res, key=lambda x: -x[1])
     return res
 
